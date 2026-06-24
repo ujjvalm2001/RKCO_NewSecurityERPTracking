@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+  TEMPLATE: app.config.template for BalLayer
+  
+  INSTRUCTIONS:
+  1. Copy this file to app.config
+  2. Fill in your actual values
+  3. DO NOT commit app.config to git
+  4. Add your credentials via environment variables or Azure Key Vault
+-->
+<configuration>
+  <connectionStrings>
+    <!-- Replace with your database credentials -->
+    <add name="DefaultConnection" 
+         connectionString="Data Source=YOUR_SERVER,PORT;Initial Catalog=YOUR_DATABASE;User Id=YOUR_USER;Password=YOUR_PASSWORD;" 
+         providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+  <appSettings>
+    <!-- API Credentials - Use environment variables in production -->
+    <add key="AadhaarKycToken" value="Bearer YOUR_AADHAAR_KYC_TOKEN_HERE" />
+    <add key="SurePassTokenV2" value="Bearer YOUR_SUREPASS_TOKEN_HERE" />
+    <add key="BankVerificationToken" value="Bearer YOUR_BANK_VERIFICATION_TOKEN_HERE" />
+    
+    <!-- Firebase Configuration -->
+    <add key="FirebaseProjectId" value="YOUR_PROJECT_ID" />
+    
+    <!-- Note: For production, prefer environment variables:
+         SET AadhaarKycToken=Bearer YOUR_TOKEN
+         SET SurePassTokenV2=Bearer YOUR_TOKEN
+         SET BankVerificationToken=Bearer YOUR_TOKEN
+    -->
+  </appSettings>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+  </startup>
+</configuration>

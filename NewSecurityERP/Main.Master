@@ -1,0 +1,354 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="NewSecurityERP.Main" %>
+
+<%@ Import Namespace="System.Web.Optimization" %>
+
+<!DOCTYPE html>
+
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <title>Dashboard | NewSecurityERP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta content="Employee Tracking Web Application" name="description" />
+    <meta content="Canticle Technologies Pvt. Ltd." name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+
+    <!-- Layout config Js -->
+    <script src="/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css" integrity="sha512-E4kKreeYBpruCG4YNe4A/jIj3ZoPdpWhWgj9qwrr19ui84pU5gvNafQZKyghqpFIHHE4ELK7L9bqAv7wfIXULQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!-- Toaster Message -->
+    <link media="screen" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="/assets/js/toastr-msg.js"></script>
+
+    <!--End-->
+
+    <!--DataTable Css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="layout-wrapper">
+            <header id="page-topbar">
+                <div class="layout-width">
+                    <div class="navbar-header">
+                        <div class="d-flex">
+                            <!-- LOGO -->
+                            <div class="navbar-brand-box horizontal-logo">
+                                <a href="#" class="logo logo-dark">
+                                    <span class="logo-sm">
+                                        <%--<img src="/assets/images/logo-sm.png" alt="" height="22">--%>
+                                    </span>
+                                    <span class="logo-lg">
+                                        <%--<img src="/assets/images/logo-dark.png" alt="" height="17">--%>
+                                    </span>
+                                </a>
+
+                                <a href="#" class="logo logo-light">
+                                    <span class="logo-sm">
+                                        <%--<img src="/assets/images/logo-sm.png" alt="" height="22">--%>
+                                    </span>
+                                    <span class="logo-lg">
+                                        <%--<img src="/assets/images/logo-light.png" alt="" height="17">--%>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none" id="topnav-hamburger-icon">
+                                <span class="hamburger-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <div class="ms-1 header-item d-none d-sm-flex">
+                                <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
+                                    <i class='bx bx-fullscreen fs-22'></i>
+                                </button>
+                            </div>
+                            <div class="dropdown ms-sm-3 header-item topbar-user">
+                                <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-flex align-items-center">
+                                        <img class="rounded-circle header-profile-user" id="user_img" runat="server" src="/assets/img/user.png" alt="Avatar">
+                                        <span class="text-start ms-xl-2">
+                                            <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
+                                                <asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+                                            </span>
+                                            <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">
+                                                <asp:Label ID="lblLoginType" runat="server" Text=""></asp:Label>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <!-- item-->
+                                    <h6 class="dropdown-header">Welcome
+                                        <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
+                                    </h6>
+                                    <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i><span class="align-middle">Profile</span></a>
+                                    <a class="dropdown-item" href="#"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i><span class="align-middle">Messages</span></a>
+                                    <asp:LinkButton ID="lnkBtnLogout" runat="server" class="dropdown-item" OnClick="lnkBtnLogout_Click"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i><span class="align-middle" data-key="t-logout">Logout</span></asp:LinkButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+
+
+            <div class="app-menu navbar-menu">
+                <div class="navbar-brand-box">
+                    <!-- Dark Logo-->
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <%--<img src="assets/images/logo-sm.png" alt="" height="22">--%>
+                        </span>
+                        <span class="logo-lg">
+                            <%--<img src="assets/images/logo-dark.png" alt="" height="17">--%>
+                        </span>
+                    </a>
+                    <!-- Light Logo-->
+                    <a href="#" class="logo logo-light">
+                        <span class="logo-sm">
+                            <%--<img src="assets/images/logo-sm.png" alt="" height="22">--%>
+                        </span>
+                        <span class="logo-lg">
+                            <%--<img src="assets/images/logo-light.png" alt="" height="17">--%>
+                        </span>
+                    </a>
+                    <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+                        <i class="ri-record-circle-line"></i>
+                    </button>
+                </div>
+                <div id="scrollbar">
+                    <div class="container-fluid">
+                        <div id="two-column-menu">
+                        </div>
+                        <ul class="navbar-nav" id="navbar-nav">
+                            <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                            <%--<li class="nav-item">
+                                <a class="nav-link menu-link" href="/Dashboard">
+                                    <i class="ri-dashboard-2-line"></i><span data-key="t-dashboards">Dashboard</span>
+                                </a>
+                            </li>--%>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                    <i class="ri-dashboard-fill"></i><span data-key="t-dashboards">Dashboards</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/dashboard" class="nav-link d-none" data-key="t-analytics">Registration Dashhboard </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/tracking-dashboard" class="nav-link" data-key="t-crm">Tracking Dashboard </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item d-none">
+                                <a class="nav-link menu-link" href="#sidebarRegistration" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                    <i class="ri-dashboard-2-line"></i><span data-key="t-dashboards">Registration</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarRegistration">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/new-user-registration" class="nav-link" data-key="t-analytics">Candidate Registration </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/CandidateApproval" class="nav-link" data-key="t-crm">View Candidate Approval </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+
+
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarTrackingMasters" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                    <i class="ri-apps-fill"></i><span data-key="t-dashboards">Tracking Masters</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarTrackingMasters">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/employee-master" class="nav-link" data-key="t-crm">Employee Master </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/unit-master" class="nav-link" data-key="t-crm">Unit Master </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/task-master" class="nav-link">Task Master </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/task-question-master" class="nav-link">Task Question Master </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/general-question-master" class="nav-link">General Question Master </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/unit-qr-code" class="nav-link">Unit QR Code </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarTransaction" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                    <i class="ri-bnb-fill"></i><span data-key="t-dashboards">Transactions</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarTransaction">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/unit-wise-task-managment" class="nav-link">Unit Wise Task Managment </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/daily-task-assignment" class="nav-link">Daily Task Assignment </a>
+                                        </li>
+                                        <%-- <li class="nav-item">
+                                            <a href="/send-notification" class="nav-link">Send Notification </a>
+                                        </li>--%>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarReports" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                    <i class="ri-file-paper-2-fill"></i><span data-key="t-dashboards">Reports</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarReports">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/unit-wise-report" class="nav-link">Unit Wise Report </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/supervisor-wise-report" class="nav-link">Supervisor Wise Report </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/punchin-report" class="nav-link">PunchIn Report </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/unit-tag-report" class="nav-link">Unit Tag/UnTag Report </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Sidebar -->
+                </div>
+
+                <div class="sidebar-background"></div>
+            </div>
+            <!-- Left Sidebar End -->
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="footer-text-color">
+                                <script>document.write(new Date().getFullYear())</script>
+                                © Canticle.
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                <p class="footer-text-color">
+                                    Design & Develop by Canticle India
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </form>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js" integrity="sha512-2xXe2z/uA+2SyT/sTSt9Uq4jDKsT0lV4evd3eoE/oxKih8DSAsOF6LUb+ncafMJPAimWAXdu9W+yMXGrCVOzQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/assets/libs/node-waves/waves.min.js"></script>
+    <script src="/assets/libs/feather-icons/feather.min.js"></script>
+    <script src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+
+    <!-- DataTable Javascript -->
+
+
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+
+<%--    <script>
+        // Disable right-click on page context menu
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        // Disable Ctrl+U / F12 / Ctrl + Sht + I / and other shortcuts to open Developers Tools Window.
+        document.addEventListener('keydown', function (event) {
+            // Use event.keyCode for older browsers
+            if ((event.ctrlKey && (event.key === 'u' || event.key === 'U')) ||
+                event.keyCode === 123 || // F12 key
+                (event.ctrlKey && event.shiftKey && (event.key === 'i' || event.key === 'I' || event.keyCode === 73))) {
+                event.preventDefault();
+            }
+        });
+    </script>--%>
+
+
+    <!-- Content Placeholder for Javascript -->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderJavaScript" runat="server">
+    </asp:ContentPlaceHolder>
+
+</body>
+</html>
