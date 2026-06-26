@@ -18,7 +18,7 @@ namespace BalLayer
         public async Task SendAsync(string deviceToken, int taskId, string empCode, string unitName, string date, string title, string body)
         {
             try
-            {
+            { 
                 if (string.IsNullOrEmpty(deviceToken))
                     return;
 
@@ -40,7 +40,7 @@ namespace BalLayer
                         data = new
                         {
                             taskId = taskId.ToString(),
-                            empCode = empCode ?? "",
+                            empCode = empCode ?? "", 
                             unitName = unitName ?? "",
                             date = date ?? "",
                             type = "Assign Task"

@@ -17,7 +17,7 @@ namespace BalLayer
 		{
 			int icLen;
 			string icNewText = string.Empty;
-			char icChar;
+			char icChar;  
 			icLen = icText.Length;
 			for (int i = 1; (i <= icLen); i++)
 			{
