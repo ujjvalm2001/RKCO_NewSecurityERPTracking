@@ -14,10 +14,9 @@ namespace BalLayer
             string relativePath = ConfigurationManager.AppSettings["FCM_ServiceAccountPath"];
 
             if (string.IsNullOrEmpty(relativePath))
-                throw new Exception("FCM_ServiceAccountPath not found in web.config");
+                throw new Exception("FCM_ServiceAccountPath not found in config");
 
             string jsonPath = HostingEnvironment.MapPath(relativePath);
-
             if (string.IsNullOrEmpty(jsonPath) || !File.Exists(jsonPath))
                 throw new FileNotFoundException("Firebase service account json not found", jsonPath);
 
